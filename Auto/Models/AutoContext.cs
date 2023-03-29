@@ -5,10 +5,19 @@ namespace Auto.Models
 {
     public partial class AutoContext : DbContext
     {
+        protected readonly IConfiguration Configuration;
+        public AutoContext(IConfiguration configuration)
+        {
+            Configuration = configuration;
+        }
+        protected override void OnConfiguring(DbContextOptionsBuilder options)
+        {
+            options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
+        }
         #region Constructor
-        public AutoContext(DbContextOptions<AutoContext>options)
-            : base(options)
-        { }
+        //public AutoContext(DbContextOptions<AutoContext>options)
+        //    : base(options)
+        //{ }
         #endregion
         public virtual DbSet<Auto> Auto { get; set; }
         public virtual DbSet<Client> Client { get; set; }

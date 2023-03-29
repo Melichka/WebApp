@@ -30,11 +30,11 @@ namespace Auto.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<InsuranceType>>> GetInsuranceType()
+        public async Task<ActionResult<IEnumerable<Insurance>>> GetInsurance()
         {
-            return await _context.InsuranceType.ToListAsync();
+            return await _context.Insurance.Include(p => p.InsuranceType).ToListAsync();
         }
-
+        
         [HttpGet("{id}")]
         public async Task<ActionResult<InsuranceType>> GetInsuranceType(int id)
         {
@@ -91,6 +91,7 @@ namespace Auto.Controllers
         {
             return _context.InsuranceType.Any(e => e.Id == id);
         }
+
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteInsuranceType(int id)
