@@ -1,9 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using ASPNetCoreApp.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 
 namespace Auto.Models
 {
-    public partial class AutoContext : DbContext
+    public partial class AutoContext : IdentityDbContext<User>
     {
         protected readonly IConfiguration Configuration;
         public AutoContext(IConfiguration configuration)
@@ -30,6 +32,7 @@ namespace Auto.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<Auto>(entity =>
             {
                 entity.Property(e => e.NumberAuto).IsRequired();

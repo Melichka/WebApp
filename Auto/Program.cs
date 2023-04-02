@@ -1,4 +1,6 @@
 using System.Text.Json.Serialization;
+using ASPNetCoreApp.Models;
+using Microsoft.AspNetCore.Identity;
 using Auto.Models;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
@@ -15,6 +17,9 @@ builder.Services.AddCors(options =>
 
     });
 });
+
+builder.Services.AddIdentity<User, IdentityRole>()
+.AddEntityFrameworkStores<AutoContext>();
 
 builder.Services.AddDbContext<AutoContext>();
 builder.Services.AddControllers().AddJsonOptions(x =>
@@ -45,6 +50,9 @@ app.UseHttpsRedirection();
 
 app.UseCors();
 
+app.UseAuthorization();
+
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
