@@ -1,7 +1,20 @@
 using System.Text.Json.Serialization;
 using Auto.Models;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(
+    builder =>
+    {
+        builder.WithOrigins("http://localhost:3000")
+    .AllowAnyHeader()
+    .AllowAnyMethod();
+
+    });
+});
 
 builder.Services.AddDbContext<AutoContext>();
 builder.Services.AddControllers().AddJsonOptions(x =>
@@ -30,8 +43,17 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseCors();
+
 app.UseAuthorization();
 
 app.MapControllers();
 
 app.Run();
+//{
+//    insuranceType.map(({ insuranceTypeId, Name }) => (
+//                        < div className = "InsuranceType" key ={ insuranceTypeId}
+//    id ={ insuranceTypeId} >
+//                             < br />{ Name} < hr />
+//                        </ div >
+//                    ))}

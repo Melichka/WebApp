@@ -1,13 +1,17 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Auto.Models;
 using System.Reflection.Metadata;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using System.ComponentModel.DataAnnotations.Schema;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace Auto.Controllers
 {
     [Route("api/[controller]")]
+    [EnableCors]
     [ApiController]
     public class AutoController : ControllerBase
     {
@@ -27,6 +31,7 @@ namespace Auto.Controllers
                 
                 _context.SaveChanges();
             }
+         
         }
 
         [HttpGet]
