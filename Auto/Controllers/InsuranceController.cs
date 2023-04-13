@@ -5,6 +5,8 @@ using Auto.Models;
 using System.Reflection.Metadata;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.AspNetCore.Authorization;
+using System.Data;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -99,6 +101,7 @@ namespace Auto.Controllers
 
 
         [HttpDelete("{id}")]
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> DeleteInsuranceType(int id)
         {
             var insurancetype = await _context.InsuranceType.FindAsync(id);

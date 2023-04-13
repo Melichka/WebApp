@@ -16,11 +16,7 @@ namespace Auto.Models
         {
             options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
         }
-        #region Constructor
-        //public AutoContext(DbContextOptions<AutoContext>options)
-        //    : base(options)
-        //{ }
-        #endregion
+     
         public virtual DbSet<Auto> Auto { get; set; }
         public virtual DbSet<Client> Client { get; set; }
         public virtual DbSet<Incident> Incident { get; set; }
